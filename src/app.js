@@ -27,7 +27,10 @@ app.use(cors());
 
 // Initialize Redis client
 const redisClient = require('./utils/cache');
-redisClient.init();
+redisClient.init().catch((err) => {
+  logger.error('Redis Client Error:', err);
+  process.exit(1);
+});
 
 // mount api v1 routes
 app.use('/v1', routes);

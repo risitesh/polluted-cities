@@ -9,7 +9,7 @@ class Cache {
     this.url = url;
     this.client = redis.createClient({ url: this.url });
     this.client.on('error', (err) => {
-      logger.error('Redis Client Error:', err);
+      throw err;
     });
     this._connected = false;
   }
